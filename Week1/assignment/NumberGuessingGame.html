@@ -1,0 +1,37 @@
+<htm>
+    <div id="notification">Type your number that you are think about...You have 10 times to guess</div>
+    <input id='numberInput' type="text"/>
+    <input id='btnGuess'type="button" value='guess'/>
+
+    <script>
+        let btnGuess = document.getElementById('btnGuess');
+        let randomNumber = Math.floor(Math.random()*10);
+        let guessCount = 10;
+        alert(`The random number is: ${randomNumber}`);
+
+        btnGuess.addEventListener('click', function(){
+            if (guessCount ===0){
+                document.getElementById('notification').style.background = 'red';
+                document.getElementById('notification').innerHTML = `Sorry! You have ${guessCount} guesses left`;
+            }
+            else{
+                guessCount--;
+
+                let numberInput = document.getElementById('numberInput').value;
+
+                if (parseInt(numberInput) === randomNumber){
+                    document.getElementById('notification').style.background = 'green';
+                    document.getElementById('notification').innerHTML = 'Correct !!!';
+                }
+                else if (parseInt(numberInput) > randomNumber){
+                    document.getElementById('notification').style.background = 'red';
+                    document.getElementById('notification').innerHTML = `Higher than answer! You have ${guessCount} guesses left`;
+                }
+                else  if (parseInt(numberInput) < randomNumber){
+                    document.getElementById('notification').style.background = 'red';
+                    document.getElementById('notification').innerHTML = `Lower than answer! You have ${guessCount} guesses left`;
+                }
+            }
+        });
+    </script>
+</htm>

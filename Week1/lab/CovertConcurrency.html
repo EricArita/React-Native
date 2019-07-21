@@ -1,0 +1,55 @@
+<html>
+
+<body>
+    <h1>Currency Converter</h1>
+    <h3>Select input currency</h3>
+    <form>
+        <input type="radio" name='myRadioButton' value="USD" id="usdRadio" />
+        <label>USD</label>
+        <input type="radio" name='myRadioButton' value="EUR" id="euroRadio" />
+        <label>EUR</label>
+    </form>
+    <input type="text" id="currencyInput" />
+    <button id="button">Convert currency</button>
+
+    <script>
+        var btn = document.getElementById("button");
+        console.log(btn);
+        var currCurrency;
+        let euroRadio = document.getElementById('euroRadio');
+        let usdRadio = document.getElementById('usdRadio');
+
+        if (euroRadio.checked === true) {
+            currCurrency = euroRadio.value;
+        }
+        else {
+            console.log(usdRadio.value);
+            currCurrency = usdRadio.value;
+        }
+
+        btn.onclick = function () { callApi(currCurrency) }
+
+        function callApi(currency) {
+            var Currency = document.getElementById('currencyInput').value;
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://free.currconv.com/api/v7/convert?q=' + currency + '_VND&compact=ultra&apiKey=25f9ad02aaae4b3b8c62');
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText)
+                    console.log(Currency);
+                    updateResults(response.USD_VND * Currency);
+                }
+                else {
+                    alert('Request failed.  Returned status of ' + xhr.status);
+                }
+            };
+            xhr.send();
+        }
+
+        function updateResults(response) {
+            console.log(response);
+        }
+    </script>
+</body>
+
+</html>
