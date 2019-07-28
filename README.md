@@ -1,2 +1,2 @@
 # React-Native
-Source code for react native app
+Source code for react native course
